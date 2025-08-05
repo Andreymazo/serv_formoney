@@ -1,0 +1,51 @@
+<div class="item_detail">
+    <!-- Ссылка на товар -->
+    <a href="https://www.wildberries.ru/catalog/{{artikul}}/detail.aspx" target="_blank" style="text-decoration: none; color: #000;">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%; font-size: 24px;">
+            Нажмите сюда для перехода на товар
+        </div>
+    </a>
+
+    <!-- Ссылка "Back home" -->
+    <p style="margin-top: 20px; display: flex; justify-content: center; align-items: center; text-align: center;">
+        <a href="{% url 'users:home' %}" style="text-decoration: none; color: #000;">Back home</a>
+    </p>
+</div>
+
+<style>
+    .hidden-url {
+        position: absolute;
+        left: -9999px;
+    }
+    
+    .item_detail{
+        display: flex;
+        top: 130px;
+        left: 20px;
+        background: #40E0D0;
+        width: 40%;
+        height: 580px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none; /* Убираем подчеркивание ссылок */
+        color: #000;          /* Цвет текста */
+        display: block;       /* Размещаем элемент как блочный, чтобы он занимал всю доступную высоту */
+        padding: 15px 0;      /* Добавляем вертикальное пространство между ссылками */
+    }
+
+    p {
+        margin-top: 20px;
+    }
+
+    .item_detail > a,
+    .item_detail > p {
+        flex: 1;
+        text-align: center;   /* Выравнивание текста по центру внутри блока */
+    }
+</style>
+
+

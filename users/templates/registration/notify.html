@@ -1,0 +1,9 @@
+вам выслана ссылка на {{email}}
+
+ {% if messages %} 
+   <div>
+       {% for message in messages %}
+           <p>{{ message }}</p>
+       {% endfor %}
+   </div>
+   {%endif%}

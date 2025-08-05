@@ -1,0 +1,258 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<style>
+    #sidebar {
+        position: absolute;
+        top: 130px;
+        left: 20px;
+        background: #40E0D0;
+        width: 40%;
+        height: 580px;
+    }
+
+    .rating {
+      
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+      .rating_desc {
+       
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+    .price_total {
+      
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+
+    .views {
+      
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+
+    .price_total_views_rating {
+     
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+    
+    .price_total_rating_views {
+    
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+    .rating_views_price_total{
+        position: absolute;
+        top: 130px;
+        left: 420px;
+        background: #40e0d3;
+        width: 50%;
+        height: 580px;
+    }
+    .block {
+        display: none; /* Скрыть по умолчанию */
+    }
+
+    #filter-select {
+        position: absolute;
+        top: 30px;
+        left: 20px;
+        background: #a5c223;
+        width: 20%;
+        height: 100px;
+    }
+</style>
+
+
+<div id="sidebar" style="overflow-y:scroll;">
+                <div>
+                    <form action="" method="POST" >
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        
+                        <input type="submit" value="Go">
+                    </form>
+
+                      <table class="table table-dark table-striped">
+
+                    <thead>
+                            <h3 style="text-align: center;"> </h3>
+                    </thead>
+                        <tbody>
+                          <thead>
+                            <tr>
+                              
+                              <th scope="col">Название категории </th>
+                         
+                            </tr>
+                          </thead>
+                          {% for category in pars_lst %}
+                                  <tbody>
+                                   
+                                    <td>
+                                        <a class="btn.btn-default" href="{% url 'services:pars_wb' category num %}" >{{category}}</a>
+                                    </td>
+                                   
+                                  </tbody>
+
+                          {% endfor %}
+                        </tbody>
+                  </table>
+                <p>
+                  <a href="{% url 'users:delete_query_table' %}" >Delete Query table and back to search</a>
+                </p>
+                  <p>
+                    <a href="{% url 'users:home' %}" >Back home</a>
+                  </p>
+                  
+                </div>
+</div>
+
+<body>
+
+  
+  <select id="filter-select">
+    <option value="">Выберите способ отображения</option>
+    <option value="rating">По рейтингу (по возрастанию)</option>
+    <option value="rating_desc">По рейтингу (по убыванию)</option>
+    <option value="price_total">По цене (по возрастанию)</option>
+    <option value="views">По просмотрам (по возрастанию)</option>
+    <option value="price_total_views_rating">По цене просмотрам рейтингу</option>
+    <option value="rating_views_price_total">По рейтингу просмотрам цене</option>
+
+</select>
+<div class="block rating" style="overflow-y:scroll;">
+    
+    {%for item in qs_rating%}
+    <li>
+       {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+   
+    {%endfor%}
+</div>
+<div class="block rating_desc" style="overflow-y:scroll;">
+      {%for item in qs_rating_desc%}
+     <li>
+       {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+    {%endfor%}
+</div>
+<div class="block price_total" style="overflow-y:scroll;">
+      {%for item in qs_price_total%}
+    <li>
+       {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+    {%endfor%}
+</div>
+<div class="block views" style="overflow-y:scroll;">
+      {%for item in qs_views%}
+      <li>
+       {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+    {%endfor%}
+</div>
+<div class="block price_total_rating_views" style="overflow-y:scroll;">
+      {%for item in qs_views%}
+      <li>
+       {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+    {%endfor%}
+</div>
+<div class="block rating_views_price_total" style="overflow-y:scroll;">
+      {%for item in qs_rating_views_price_total%}
+      <li>
+                               
+       <a class="btn.btn-default" href="{% url 'services:item_detail' item.pk %}" >{{item.pk}} {{item.title}}</a>
+     
+     
+        {{item.title}}
+    {{item.price_total}}
+    {{item.price_basic}}
+    {{item.rating}}
+    {{item.views}}
+    {{item.article_uniq}}
+    </li>
+    {%endfor%}
+</div>
+
+<script>
+$(document).ready(function() {
+    // Функция для сокрытия всех блоков, кроме одного, соответствующего выбранному значению
+    function showBlockAccordingToSelection() {
+        const selectedValue = $('#filter-select').val();
+        
+        if (selectedValue) {
+            // Скрываем все блоки
+            $('.block').hide();
+
+            // Показываем выбранный блок
+            $('.' + selectedValue).show();
+        }
+    }
+
+    // Вызываем функцию при загрузке страницы, чтобы показать правильный блок по умолчанию
+    showBlockAccordingToSelection();
+
+    // Обрабатываем событие change для select
+    $('#filter-select').on('change', function() {
+        showBlockAccordingToSelection();
+    });
+});
+</script>
+
+
+</script>
+</body>
